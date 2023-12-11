@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Переключение темы</title>
+    <style>
+         body {
+      background-image: url('/static/fon.png');
+    }
+    
+    body.brown {
+      background-image: url('/static/fontwo.png');
+    }
+        .switch-container {
+            position: absolute;
+            top: 48px;
+            left: 440px;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: background-color 0.4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: transform 0.4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #000;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .logo {
+            position: absolute;
+            top: 40px;
+            left: 330px;
+        }
+        
+        .switchbuttons {
+            position: absolute;
+            top: 35px;
+            left: 540px;
+            border-radius: 20px;
+            cursor: pointer;
+            border: none;
+            padding: 10px 20px;
+        }
+        
+        .myposts-btn {
+            background-color: #000;
+            color: #fff;
+            border-radius: 20px;
+            cursor: pointer;
+            padding: 10px 20px;
+        }
+        .settings {
+            position: absolute;
+            top: 48px;
+            left: 690px;
+            border-radius: 20px;
+            cursor: pointer;
+            border: none;
+            
+
+        }
+        .createpost-btn {
+            background-color: #000;
+            color: #fff;
+            border-radius: 20px;
+            cursor: pointer;
+            border: none;
+            padding: 10px 20px;
+        }
+
+        .createpost {
+            position: absolute;
+            top: 48px;
+            left: 815px;
+            border-radius: 20px;
+            cursor: pointer;
+            border: none;
+            
+
+        }
+        .settings-btn {
+            background-color: #000;
+            color: #fff;
+            border-radius: 20px;
+            cursor: pointer;
+            border: none;
+            padding: 10px 20px;
+        }
+
+        .card {
+            position: absolute;
+            top: 120px; 
+            left: 300px; 
+        }
+
+        .card img {
+            width: 200px;
+        }
+
+        .post {
+            position: absolute;
+            top: 120px; 
+            left: 530px; 
+        }
+
+        .post img {
+            width: 440px;
+        }
+
+        .groups-btn {
+            background-color: #000;
+            color: #fff;
+            border-radius: 20px;
+            cursor: pointer;
+            border: none;
+            padding: 10px 20px;
+        }
+
+        .groups {
+            position: absolute;
+            top: 318px;
+            left: 330px;
+            border-radius: 20px;
+            cursor: pointer;
+            border: none;
+            
+
+        }
+        
+
+        
+
+        
+
+
+       
+        
+
+    </style>
+</head>
+<body>
+    <div class="logo">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="VMtuci лого" width="100" height="50">
+    </div>
+    <div class="switch-container">
+        <label class="switch">
+            <input type="checkbox" id="themeSwitch">
+            <span class="slider"></span>
+        </label>     
+    </div>
+    <div class="switchbuttons">
+        
+        <button class="myposts-btn">Мои посты</button>
+       
+    </div>
+    <div class="settings">
+        <button class="settings-btn">Настройки</button>
+       
+    </div>
+
+    <div class="createpost">
+        <button class="createpost-btn" onclick="window.location.href='createpost.html'">Создайте пост</button>
+    </div>
+
+    <div class="groups">
+        <button class="groups-btn">Сообщества</button>
+        <div class="groups-list" style="display: none;">
+            <ul>
+                <li>Подслушано VMtuci</li>
+                <li>Рифмы и Панчи</li>
+                <li>Новости Москвы</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        document.querySelector('.groups-btn').addEventListener('click', function() {
+            var list = document.querySelector('.groups-list');
+            if (list.style.display === 'none') {
+                list.style.display = 'block';
+            } else {
+                list.style.display = 'none';
+            }
+        });
+    </script>
+    
+
+    
+
+    
+    
+    
+
+    <div class="post">
+    <img src="{{ url_for('static', filename='post.png') }}">
+</div>
+
+    <div class="card">
+    <img src="{{ url_for('static', filename='cardus.png') }}">
+</div>
+    
+    
+      <script>
+        const switcher = document.getElementById('themeSwitch');
+        const body = document.body;
+    
+        switcher.addEventListener('change', function() {
+          if(this.checked) {
+            body.classList.add('brown');
+          } else {
+            body.classList.remove('brown');
+          }
+        });
+      </script>
+      
+
+      
+
+    
+</body>
+</html>

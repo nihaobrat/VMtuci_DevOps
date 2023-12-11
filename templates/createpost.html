@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Создание поста</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('fon.png');
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form {
+      background-color: #fff;
+      padding: 80px; /* Увеличенный размер плашки */
+      border-radius: 21px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 21px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 21px;
+      background-color: #5845A7;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #5845A7;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="form">
+    <h2>Расскажите о чём-нибудь</h2>
+
+    <input type="text" placeholder="Заголовок" id="title">
+    <textarea placeholder="Текст поста" id="text"></textarea>
+
+    <button onclick="location.href='createdpost.html'">Опубликовать</button>
+  </div>
+
+  <script>
+    function createPost() {
+      let title = document.getElementById('title').value; 
+      let text = document.getElementById('text').value;
+
+      // Здесь можно отправить данные на сервер
+
+      // Переход на следующую страницу
+      window.location.href = '/created.html'; 
+    }
+  </script>
+
+</body>
+</html>
