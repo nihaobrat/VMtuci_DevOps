@@ -59,7 +59,7 @@
     <input type="text" placeholder="Заголовок" id="title">
     <textarea placeholder="Текст поста" id="text"></textarea>
 
-    <button onclick="location.href='createdpost.html'">Опубликовать</button>
+    <button onclick="location.href='{{ url_for('created_post') }}'">Опубликовать</button>
   </div>
 
   <script>

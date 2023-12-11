@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Переключение темы</title>
+    <title>Основная страница</title>
     <style>
          body {
         background-image: url('/static/fon.png');
@@ -157,10 +157,47 @@
             border-radius: 20px;
             cursor: pointer;
             border: none;
-            
+        }
+        .groups-list {
+    display: none; /* Меню скрыто по умолчанию */
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    transition: opacity 0.5s ease;
+}
+        .groups-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px; /* Скругление для всего списка */
+    overflow: hidden; /* Предотвращает выход содержимого за границы скругления */
+}
 
+.groups-list li {
+    padding: 8px 16px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    background-color: white; /* Белый фон для каждого пункта списка */
+    transition: background-color 0.2s ease; /* Плавное изменение фона при наведении */
+}
+
+.groups-list li:hover {
+    background-color: #f6f6f6; /* Цвет фона при наведении */
+}
+
+        .groups-list li:last-child {
+            border-bottom: none;
         }
 
+        .groups-list li a {
+            text-decoration: none;
+            color: black;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -171,7 +208,7 @@
         <label class="switch">
             <input type="checkbox" id="themeSwitch">
             <span class="slider"></span>
-        </label>     
+        </label>
     </div>
     <div class="switchbuttons">
         
@@ -179,8 +216,146 @@
        
     </div>
     <div class="settings">
-        <button class="settings-btn">Настройки</button>
-       
+  <!-- Кнопка для открытия модального окна -->
+  <button class="settings-btn" onclick="openSettings()">Настройки</button>
+
+  <!-- Модальное окно -->
+  <div id="settingsModal" class="modal">
+    <!-- Содержимое модального окна -->
+    <div class="modal-content">
+      <span class="close" onclick="closeSettings()">&times;</span>
+      <div class="theme-selector">
+        <label for="theme">Тема:</label>
+        <select id="theme" onchange="changeTheme(this.value)">
+          <option value="light">Светлая</option>
+          <option value="dark">Темная</option>
+        </select>
+      </div>
+      <button onclick="closeSettings()">Сохранить</button>
+    </div>
+  </div>
+</div>
+<script>
+// Глобальная переменная для хранения текущей темы
+var currentTheme = 'light'; // Значение по умолчанию
+
+// Функция для изменения фона
+function changeBackground(theme) {
+  const body = document.body;
+  if (theme === 'light') {
+    body.style.backgroundImage = "url('/static/fon.png')";
+    currentTheme = 'light';
+    document.getElementById('themeSwitch').checked = false;
+  } else if (theme === 'dark') {
+    body.style.backgroundImage = "url('/static/fontwo.png')";
+    currentTheme = 'dark';
+    document.getElementById('themeSwitch').checked = true;
+  }
+}
+
+// Функция для открытия модального окна
+function openSettings() {
+  document.getElementById('settingsModal').style.display = 'block';
+  // Обновляем значение select в модальном окне в соответствии с текущей темой
+  document.getElementById('theme').value = currentTheme;
+}
+
+// Функция для закрытия модального окна
+function closeSettings() {
+  document.getElementById('settingsModal').style.display = 'none';
+}
+
+// Функция для смены темы из модального окна
+function changeTheme(theme) {
+  changeBackground(theme);
+  closeSettings();
+}
+
+// Функция для смены темы из переключателя на странице
+function toggleTheme() {
+  var newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  changeBackground(newTheme);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Установите начальное состояние переключателя на основе текущей темы
+  document.getElementById('themeSwitch').checked = (currentTheme === 'dark');
+
+  // Добавляем обработчик событий к переключателю темы
+  const switcher = document.getElementById('themeSwitch');
+  switcher.addEventListener('change', toggleTheme);
+});
+</script>
+
+<style>
+/* Стили для модального окна */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 300px; /* Маленькое окно */
+  border-radius: 150px; /* Круглое окно */
+  text-align: center;
+}
+
+/* Стили для кнопки закрытия */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Стили для выпадающего списка */
+.theme-selector {
+  margin-bottom: 10px;
+}
+
+.theme-selector select {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 10px;
+  width: 150px;
+  outline: none; /* Убрать стандартный outline */
+  cursor: pointer;
+}
+
+/* Стили для кнопки Сохранить */
+button {
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #5845A7;
+  color: white;
+}
+
+button:hover {
+  background-color: #41337A;
+}
+
+</style>
+
     </div>
 
     <div class="createpost">
@@ -188,25 +363,33 @@
 </div>
 
     <div class="groups">
-        <button class="groups-btn">Сообщества</button>
-        <div class="groups-list" style="display: none;">
+        <button class="groups-btn" onclick="toggleGroupsList()">Сообщества</button>
+        <div class="groups-list">
             <ul>
-                <li>Подслушано VMtuci</li>
-                <li>Рифмы и Панчи</li>
-                <li>Новости Москвы</li>
+                <li onclick="goToPage('https://vk.com/overhearmtuci')">Подслушано VMtuci</li>
+                <li onclick="goToPage('https://vk.com/rhymes')">Рифмы и Панчи</li>
+                <li onclick="goToPage('https://www.m24.ru/news')">Новости Москвы</li>
             </ul>
         </div>
     </div>
 
     <script>
-        document.querySelector('.groups-btn').addEventListener('click', function() {
-            var list = document.querySelector('.groups-list');
-            if (list.style.display === 'none') {
-                list.style.display = 'block';
-            } else {
-                list.style.display = 'none';
-            }
-        });
+        function toggleGroupsList() {
+    var list = document.querySelector('.groups-list');
+    if (list.style.display === 'none' || !list.style.display) {
+        list.style.display = 'block';
+        list.style.opacity = 1;
+    } else {
+        list.style.opacity = 0;
+        setTimeout(function() {
+            list.style.display = 'none';
+        }, 500); // Задержка, равная продолжительности анимации
+    }
+}
+
+        function goToPage(url) {
+            window.location.href = url; // Перенаправление на указанный URL
+        }
     </script>
 
     <div class="post">
