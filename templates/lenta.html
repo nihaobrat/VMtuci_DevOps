@@ -6,7 +6,11 @@
     <title>Переключение темы</title>
     <style>
          body {
-      background-image: url('/static/fon.png');
+        background-image: url('/static/fon.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        min-height: 100vh;
     }
     
     body.brown {
@@ -193,7 +197,7 @@
             </ul>
         </div>
     </div>
-    
+
     <script>
         document.querySelector('.groups-btn').addEventListener('click', function() {
             var list = document.querySelector('.groups-list');
@@ -216,7 +220,7 @@
       <script>
         const switcher = document.getElementById('themeSwitch');
         const body = document.body;
-    
+
         switcher.addEventListener('change', function() {
           if(this.checked) {
             body.classList.add('brown');

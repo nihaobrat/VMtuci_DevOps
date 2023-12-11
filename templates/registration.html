@@ -81,8 +81,13 @@
     <script type="text/javascript">
     var signInUrl = "{{ url_for('signin') }}";
 </script>
-   <script>
-    function validateForm() {
+<script>
+function validateEmail(email) {
+    var pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return pattern.test(email);
+}
+
+function validateForm() {
     var login = document.getElementById('login').value;
     var name = document.getElementById('name').value;
     var surname = document.getElementById('surname').value;
@@ -90,6 +95,10 @@
     var password = document.getElementById('password').value;
 
     if (login !== '' && name !== '' && surname !== '' && email !== '' && password !== '') {
+        if (!validateEmail(email)) {
+            alert('Пожалуйста, введите корректный адрес электронной почты.');
+            return false;
+        }
         window.location.href = signInUrl; // Используйте переменную из вашего HTML-шаблона
     } else {
         alert('Пожалуйста, заполните все поля.');
