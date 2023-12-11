@@ -156,15 +156,6 @@
             
 
         }
-        
-
-        
-
-        
-
-
-       
-        
 
     </style>
 </head>
@@ -189,8 +180,8 @@
     </div>
 
     <div class="createpost">
-        <button class="createpost-btn" onclick="window.location.href='createpost.html'">Создайте пост</button>
-    </div>
+    <button class="createpost-btn" onclick="window.location.href='{{ url_for('create_post') }}'">Создайте пост</button>
+</div>
 
     <div class="groups">
         <button class="groups-btn">Сообщества</button>
@@ -213,13 +204,6 @@
             }
         });
     </script>
-    
-
-    
-
-    
-    
-    
 
     <div class="post">
     <img src="{{ url_for('static', filename='post.png') }}">
@@ -228,8 +212,7 @@
     <div class="card">
     <img src="{{ url_for('static', filename='cardus.png') }}">
 </div>
-    
-    
+
       <script>
         const switcher = document.getElementById('themeSwitch');
         const body = document.body;
@@ -242,10 +225,5 @@
           }
         });
       </script>
-      
-
-      
-
-    
 </body>
 </html>
